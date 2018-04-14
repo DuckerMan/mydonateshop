@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyDonate SHOP</title>
+	<script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
+</head>
+<body>
+<h1>Утка</h1>
+<script>
+	function Server(token) {
+		this.registerAccount = async (login, password, domain) => {
+			let r = await sendReq('users.register', {login:login, password:password, domain:domain});
+			console.log(r);
+		}
+
+
+		async function sendReq(method, params) {
+			params.token = token;
+			return await $.post(`/api/${method}`, params);
+		}
+		this.sendReq = sendReq;
+	}
+	const server = new Server('f');
+</script>
+</body>
+</html>
